@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import React from 'react';
+import { useRouter } from '@tanstack/react-router';
 
 type Props = {
   children: JSX.Element;
@@ -9,11 +9,11 @@ type Props = {
 export default function AuthGuard(props: Props) {
   const { children } = props;
   const userLoggedIn = true;
-  const navigate = useNavigate();
+  const { navigate } = useRouter();
 
   useEffect(() => {
     if (!userLoggedIn) {
-      navigate('/login');
+      navigate({ to: '/login' });
     }
   }, [navigate, userLoggedIn]);
 

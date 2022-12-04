@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from '@tanstack/react-router';
 import React from 'react';
 
 export type AuthKeys = 'userDetail';
@@ -28,11 +28,11 @@ export default function RouteGuard(props: Props) {
   const { children, authKey } = props;
   const userRole: RoleType = 'manager';
   const isUserAuthorized = checkUserAuthorize(userRole, authKey);
-  const navigate = useNavigate();
+  const { navigate } = useRouter();
 
   useEffect(() => {
     if (!isUserAuthorized) {
-      navigate('/');
+      navigate({ to: '/' });
     }
   }, [isUserAuthorized, navigate]);
 

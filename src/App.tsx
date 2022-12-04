@@ -1,11 +1,14 @@
 import React from 'react';
+import ErrorBoundary from './Components/Errors/ErrorBoundry';
 import Routes from './Routes/Routes';
 
 function App() {
   return (
-    <main className="grid">
-      <Routes />
-    </main>
+    <ErrorBoundary>
+      <main className="grid">
+        <Routes />
+      </main>
+    </ErrorBoundary>
   );
 }
 
