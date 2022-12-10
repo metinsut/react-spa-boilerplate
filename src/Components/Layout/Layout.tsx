@@ -4,7 +4,9 @@ import Header from '../Header/Header';
 
 export default function Layout() {
   const {
-    location: { pathname },
+    state: {
+      currentLocation: { pathname }
+    },
     navigate
   } = useRouter();
 
