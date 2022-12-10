@@ -1,10 +1,18 @@
 import { sleep } from '../../helpers';
 
-export type User = { id: number; title: string };
+export type User = {
+  id: number | string;
+  name: string;
+  username: string;
+  email: string;
+  phone: string;
+  website: string;
+};
 
 export async function userLoader() {
-  const API = 'https://jsonplaceholder.typicode.com/posts';
+  const API = 'https://jsonplaceholder.typicode.com/users';
   // await sleep(2000);
+
   try {
     const response = await fetch(API);
     if (!response.ok) throw new Error();

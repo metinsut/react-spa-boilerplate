@@ -3,10 +3,10 @@ import React from 'react';
 
 export default function ErrorPage() {
   // const router = useRouter();
-  const match = useMatch('/user');
+  // const match = useMatch('/user');
   // const route = useRoute('user');
   // console.log('router', router);
-  console.log('match', match.error);
+  // console.log('match', match.error);
   // console.log('route', route);
   return (
     <div id="error-page">

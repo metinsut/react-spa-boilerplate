@@ -6,6 +6,7 @@ import Layout from '../Components/Layout/Layout';
 import { userLoader } from '../Pages/User/userLoader';
 import RouteGuard from '../Components/Layout/RouteGuard';
 import { userDetailLoader } from '../Pages/User/userDetailLoader';
+import Profile from '../Pages/Profile';
 
 const Home = lazy(() => import('../Pages/Home'));
 const Login = lazy(() => import('../Pages/Login'));
@@ -36,7 +37,6 @@ const registerRoute = rootRoute.createRoute({
 
 const indexRoute = rootRoute.createRoute({
   path: '/',
-  errorComponent: ErrorPage,
   component: () => (
     <AuthGuard>
       <Layout />
@@ -47,6 +47,12 @@ const indexRoute = rootRoute.createRoute({
 const homeRoute = indexRoute.createRoute({
   path: 'home',
   component: Home,
+  errorComponent: ErrorPage
+});
+
+const profileRoute = indexRoute.createRoute({
+  path: 'profile',
+  component: Profile,
   errorComponent: ErrorPage
 });
 
@@ -71,7 +77,7 @@ const userDetailRoute = userRoute.createRoute({
 const routeConfig = rootRoute.addChildren([
   loginRoute,
   registerRoute,
-  indexRoute.addChildren([homeRoute, userRoute.addChildren([userDetailRoute])])
+  indexRoute.addChildren([homeRoute, profileRoute, userRoute.addChildren([userDetailRoute])])
 ]);
 
 const router = createReactRouter({
