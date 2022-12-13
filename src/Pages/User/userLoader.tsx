@@ -1,17 +1,7 @@
-import { sleep } from '../../helpers';
-
-export type User = {
-  id: number | string;
-  name: string;
-  username: string;
-  email: string;
-  phone: string;
-  website: string;
-};
+import { User } from 'types/users';
 
 export async function userLoader() {
   const API = 'https://jsonplaceholder.typicode.com/users';
-  // await sleep(2000);
 
   try {
     const response = await fetch(API);

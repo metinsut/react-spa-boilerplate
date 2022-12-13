@@ -2,14 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import i18n from '../../utils/i18n';
 import { Link, useRouter } from '@tanstack/react-router';
-import { useLocalStorage } from 'usehooks-ts';
 import { faker } from '@faker-js/faker';
 
 export default function Header() {
   const { t } = useTranslation();
-
-  const [isAuthorized, setAuthorized] = useLocalStorage('auth', false);
-  const { navigate } = useRouter();
 
   const handleLanguageChange = (language: string) => {
     faker.locale = language;
@@ -19,11 +15,6 @@ export default function Header() {
   const {
     state: { isFetching }
   } = useRouter();
-
-  const handleSignOut = () => {
-    setAuthorized(false);
-    navigate({ to: '/login' });
-  };
 
   return (
     <header className="grid grid-flow-col p-4 bg-purple-600 justify-between items-center">
@@ -40,17 +31,6 @@ export default function Header() {
         <div className="flex gap-2 border border-solid border-purple-400 p-1 rounded-lg">
           <button onClick={() => handleLanguageChange('en')}>EN</button>
           <button onClick={() => handleLanguageChange('tr')}>TR</button>
-        </div>
-        <div className="grid">
-          {isAuthorized ? (
-            <div
-              className="cursor-pointer p-1 border border-solid border-purple-400 rounded-lg"
-              onClick={handleSignOut}>
-              Sign Out
-            </div>
-          ) : (
-            <Link to="login">Login</Link>
-          )}
         </div>
         <Link to="/profile" className="p-1 border border-solid border-purple-400 rounded-lg">
           My Profile

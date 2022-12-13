@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import React from 'react';
 import { useRouter } from '@tanstack/react-router';
-import { useReadLocalStorage } from 'usehooks-ts';
+import useAuthStore from 'store/authStore';
 
 type Props = {
   children: JSX.Element;
@@ -9,14 +9,15 @@ type Props = {
 
 export default function AuthGuard(props: Props) {
   const { children } = props;
-  const isAuthorized = useReadLocalStorage('auth');
+  const auth = useAuthStore((state) => state._id);
+  console.log('auth', auth);
   const { navigate } = useRouter();
 
   useEffect(() => {
-    if (!isAuthorized) {
+    if (!auth) {
       navigate({ to: '/login' });
     }
-  }, [navigate, isAuthorized]);
+  }, [navigate, auth]);
 
   return <>{children}</>;
 }

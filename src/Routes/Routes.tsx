@@ -1,27 +1,22 @@
-import React, { lazy, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { RouterProvider, createReactRouter, createRouteConfig } from '@tanstack/react-router';
-import FullScreenLoader from '../Components/Loader';
-import AuthGuard from '../Components/Layout/AuthGuard';
-import Layout from '../Components/Layout/Layout';
-import { userLoader } from '../Pages/User/userLoader';
-import RouteGuard from '../Components/Layout/RouteGuard';
-import { userDetailLoader } from '../Pages/User/userDetailLoader';
-import Profile from '../Pages/Profile';
+import FullScreenLoader from 'components/Loader';
+import Layout from 'components/Layout/Layout';
+import Profile from 'pages/Auth/Profile';
+import ErrorPage from 'components/Errors/Error';
+import AuthGuard from 'components/Layout/AuthGuard';
+import RouteGuard from 'components/Layout/RouteGuard';
+import User from 'pages/User/User';
+import { userLoader } from 'pages/User/userLoader';
+import Home from 'pages/Home';
+import UserDetail from 'pages/User/UserDetail';
+import { userDetailLoader } from 'pages/User/userDetailLoader';
+import Login from 'pages/Auth/Login';
+import Register from 'pages/Auth/Register';
+import AuthRedirect from 'pages/Auth/AuthRedirect';
+import { z } from 'zod';
 
-const Home = lazy(() => import('../Pages/Home'));
-const Login = lazy(() => import('../Pages/Login'));
-const Register = lazy(() => import('../Pages/Register'));
-const User = lazy(async () => import('../Pages/User/User'));
-const UserDetail = lazy(() => import('../Pages/User/UserDetail'));
-const ErrorPage = lazy(() => import('../Components/Errors/Error'));
-
-declare module '@tanstack/react-router' {
-  interface RegisterRouter {
-    router: typeof router;
-  }
-}
-
-const rootRoute = createRouteConfig();
+const rootRoute = createRouteConfig({});
 
 const loginRoute = rootRoute.createRoute({
   path: '/login',
@@ -32,6 +27,15 @@ const loginRoute = rootRoute.createRoute({
 const registerRoute = rootRoute.createRoute({
   path: '/register',
   component: Register,
+  errorComponent: ErrorPage
+});
+
+const authRedirectRoute = rootRoute.createRoute({
+  path: '/auth-redirect',
+  component: AuthRedirect,
+  validateSearch: z.object({
+    access_token: z.string().optional()
+  }),
   errorComponent: ErrorPage
 });
 
@@ -77,6 +81,7 @@ const userDetailRoute = userRoute.createRoute({
 const routeConfig = rootRoute.addChildren([
   loginRoute,
   registerRoute,
+  authRedirectRoute,
   indexRoute.addChildren([homeRoute, profileRoute, userRoute.addChildren([userDetailRoute])])
 ]);
 
@@ -92,4 +97,10 @@ export default function Routes() {
       <RouterProvider router={router} />
     </Suspense>
   );
+}
+
+declare module '@tanstack/react-router' {
+  interface RegisterRouter {
+    router: typeof router;
+  }
 }
