@@ -9,9 +9,9 @@ type Props = {
 
 export default function AuthGuard(props: Props) {
   const { children } = props;
-  const auth = useAuthStore((state) => state._id);
-  console.log('auth', auth);
+
   const { navigate } = useRouter();
+  const auth = useAuthStore((state) => state._id);
 
   useEffect(() => {
     if (!auth) {

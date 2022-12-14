@@ -10,9 +10,7 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <main className="grid">
-        <Routes />
-      </main>
+      <Routes />
     </ErrorBoundary>
   );
 }

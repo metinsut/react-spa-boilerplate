@@ -19,9 +19,7 @@ export default function Layout() {
   return (
     <>
       <Header />
-      <div
-        className="grid overflow-auto p-4 overflow-x-hidden content-start"
-        style={{ height: 'calc(100vh - 70px)' }}>
+      <div className="overflow-auto p-4 overflow-x-hidden" style={{ height: 'calc(100vh - 66px)' }}>
         <Outlet />
       </div>
     </>

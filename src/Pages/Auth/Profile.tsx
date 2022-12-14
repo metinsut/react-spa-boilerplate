@@ -40,23 +40,26 @@ export default function Profile() {
   };
 
   return (
-    <div className="grid justify-start">
-      <label className="relative grid grid-flow-col gap-2 justify-start items-center border border-slate-400 p-2 rounded-lg">
-        Toggle Mock
-        <input
-          defaultChecked={mock ?? false}
-          onChange={handleChange}
-          type="checkbox"
-          className="peer appearance-none"
-        />
-        <span className="w-16 h-10 flex items-center flex-shrink-0 ml-4 p-1 bg-gray-300 rounded-full duration-300 ease-in-out peer-checked:bg-green-400 after:w-8 after:h-8 after:bg-white after:rounded-full after:shadow-md after:duration-300 peer-checked:after:translate-x-6"></span>
-      </label>
-
-      <button
-        onClick={handleSignOut}
-        className="bg-purple-400 shadow-2xl text-white p-2 rounded-lg">
-        Sign Out
-      </button>
+    <div className="flex justify-between">
+      <div>
+        <label className="relative grid grid-flow-col gap-2 justify-start items-center border border-slate-400 p-2 rounded-lg">
+          Toggle Mock
+          <input
+            defaultChecked={mock ?? false}
+            onChange={handleChange}
+            type="checkbox"
+            className="peer appearance-none"
+          />
+          <span className="w-16 h-10 flex items-center flex-shrink-0 ml-4 p-1 bg-gray-300 rounded-full duration-300 ease-in-out peer-checked:bg-green-400 after:w-8 after:h-8 after:bg-white after:rounded-full after:shadow-md after:duration-300 peer-checked:after:translate-x-6"></span>
+        </label>
+      </div>
+      <div>
+        <button
+          onClick={handleSignOut}
+          className="bg-purple-400 shadow-2xl text-white p-2 rounded-lg hover:bg-purple-700">
+          Sign Out
+        </button>
+      </div>
     </div>
   );
 }
