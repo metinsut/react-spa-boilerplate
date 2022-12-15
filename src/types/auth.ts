@@ -11,3 +11,8 @@ export type Auth = {
 export type AuthState = Auth & {
   setAuth: (auth: Auth | null) => void;
 };
+
+export type AuthRequest = {
+  email: string;
+  password: string;
+};
