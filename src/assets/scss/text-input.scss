@@ -1,0 +1,106 @@
+.form-element-input {
+  outline: none;
+  height: 1.5rem;
+  display: block;
+  background: none;
+  padding: 0.125rem 0.125rem 0.0625rem;
+  font-size: 1rem;
+  border: 0;
+  line-height: 1.5;
+  width: 100%;
+  color: #333;
+  box-shadow: none;
+  opacity: 0.001;
+  transition: opacity 0.28s ease;
+  will-change: opacity;
+}
+
+.form-element-input::placeholder {
+  color: #a6a6a6;
+  transform: scale(0.9);
+  transform-origin: left top;
+}
+
+.form-element-bar {
+  height: 1px;
+  background: #999;
+  position: relative;
+  display: block;
+}
+
+.form-element-bar:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #337ab7;
+  height: 2px;
+  display: block;
+  transform: rotateY(90deg);
+  transition: transform 0.28s ease;
+  will-change: transform;
+}
+
+.form-element-label {
+  position: absolute;
+  top: 0.85rem;
+  line-height: 1.5rem;
+  pointer-events: none;
+  padding-left: 0.125rem;
+  z-index: 1;
+  font-size: 1rem;
+  margin: 0;
+  color: #a6a6a6;
+  transform: translateY(-50%);
+  transform-origin: left center;
+  transition: transform 0.28s ease, color 0.28s linear, opacity 0.28s linear;
+  will-change: transform, color, opacity;
+  cursor: text;
+}
+
+.form-element-hint {
+  color: #aaa;
+}
+
+.form-element-input.hasValue ~ .form-element-bar::after,
+.form-element-input:focus ~ .form-element-bar::after {
+  transform: rotateY(0deg);
+}
+.form-element-input.hasValue ~ .form-element-label,
+.form-element-input:focus ~ .form-element-label {
+  color: #337ab7;
+}
+.form-element-input.hasValue,
+.form-element-input:focus {
+  opacity: 1;
+}
+.form-element-input.hasValue ~ .form-element-label,
+.form-element-input:focus ~ .form-element-label {
+  transform: translateY(-100%) translateY(-0.5em) translateY(-2px);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.form-is-success .form-element-input,
+.form-is-success .form-element-label,
+.form-is-success .form-element-hint {
+  color: #259337;
+}
+
+.form-has-error .form-element-label.form-element-label,
+.form-has-error .form-element-hint {
+  color: #d9534f;
+}
+
+.form-has-error .form-element-bar:after {
+  background: #d9534f;
+}
+
+.form-has-error .form-element-input.hasValue ~ .form-element-label,
+.form-has-error .form-element-input:focus ~ .form-element-label {
+  transform: translateY(-100%) translateY(-0.5em) translateY(-2px);
+  color: #d9534f;
+  cursor: pointer;
+  pointer-events: auto;
+}

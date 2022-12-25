@@ -5,8 +5,8 @@ import useAuthStore from 'store/authStore';
 import useSessionStore from 'store/sessionStore';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AuthRequest } from 'types/auth';
-import { schema } from './schema';
+import { schema, TRegister } from './schema';
+import TextInput from 'components/Inputs/TextInput';
 
 export default function Login() {
   const { navigate } = useRouter();
@@ -18,18 +18,13 @@ export default function Login() {
   const setAuth = useAuthStore((state) => state.setAuth);
   const setSession = useSessionStore((state) => state.setSession);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch
-  } = useForm<AuthRequest>({
+  const { register, handleSubmit, control, watch } = useForm<TRegister>({
     resolver: zodResolver(schema)
   });
 
   const email = watch('email');
 
-  const handleLogin: SubmitHandler<AuthRequest> = async (formValues) => {
+  const handleLogin: SubmitHandler<TRegister> = async (formValues) => {
     try {
       setLoading(true);
       const { user, session, errors } = await altogic.auth.signInWithEmail(
@@ -67,7 +62,7 @@ export default function Login() {
 
   return (
     <div className="grid w-screen h-screen items-center justify-center content-center gap-8 bg-slate-200">
-      <form onSubmit={handleSubmit(handleLogin)} className="grid min-w-[300px] gap-5">
+      <form onSubmit={handleSubmit(handleLogin)} className="grid min-w-[300px]">
         <h3 className="text-4xl">Login</h3>
         {error?.map(({ message }: any) => (
           <div key={message} className="bg-red-600 text-white text-[13px] p-2">
@@ -79,34 +74,22 @@ export default function Login() {
             Send email again
           </button>
         )}
-        {errors && Object.keys(errors).length > 0 && (
-          <div className="bg-red-600 text-white text-[13px] p-2">
-            <p>{errors.email?.message}</p>
-            <p>{errors.password?.message}</p>
-          </div>
-        )}
         {success && <div className="bg-green-600 text-white text-[13px] p-2">{success}</div>}
-        <label
-          htmlFor="email"
-          className="border border-gray-700 border-solid p-2 rounded-lg w-full">
-          <p>Email</p>
-          <input
-            id="email"
-            {...register('email')}
-            className="border border-solid border-gray-400 rounded-md"
-          />
-        </label>
-        <label
-          htmlFor="password"
-          className="border border-gray-700 border-solid p-2 rounded-lg w-full">
-          <p>Password</p>
-          <input
-            {...register('password')}
-            id="password"
-            className="border border-solid border-gray-400 rounded-md"
-          />
-        </label>
-        <button disabled={loading} type="submit" className="bg-gray-400 rounded-lg text-white p-2">
+        <TextInput
+          className="mt-8"
+          register={register}
+          control={control}
+          name="email"
+          label="Email"></TextInput>
+        <TextInput
+          register={register}
+          control={control}
+          name="password"
+          label="Password"></TextInput>
+        <button
+          disabled={loading}
+          type="submit"
+          className="bg-gray-400 rounded-lg text-white p-2 mt-4">
           Login
         </button>
       </form>
