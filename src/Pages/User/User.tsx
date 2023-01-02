@@ -1,10 +1,9 @@
 import React from 'react';
-import { useMatch, Outlet, Link } from '@tanstack/react-router';
+import { Outlet, Link, useLoaderData } from '@tanstack/react-router';
+import { userRoute } from 'routes/Routes';
 
 export default function User() {
-  const {
-    loaderData: { users }
-  } = useMatch('/user');
+  const { users } = useLoaderData({ from: userRoute.id });
 
   return (
     <div className="grid">

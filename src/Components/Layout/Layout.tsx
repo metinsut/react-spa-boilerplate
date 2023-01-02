@@ -4,7 +4,7 @@ import Header from '../Header/Header';
 
 export default function Layout() {
   const {
-    state: {
+    store: {
       currentLocation: { pathname }
     },
     navigate

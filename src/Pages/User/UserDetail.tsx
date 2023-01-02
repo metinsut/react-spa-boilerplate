@@ -1,10 +1,9 @@
 import React from 'react';
-import { useMatch } from '@tanstack/react-router';
+import { useLoaderData } from '@tanstack/react-router';
+import { userDetailRoute } from 'routes/Routes';
 
 export default function UserDetail() {
-  const {
-    loaderData: { userDetail }
-  } = useMatch('/user/detail');
+  const { userDetail } = useLoaderData({ from: userDetailRoute.id });
 
   const detail = userDetail.slice(0, 3);
 

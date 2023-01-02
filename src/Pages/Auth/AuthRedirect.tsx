@@ -7,7 +7,7 @@ import useSessionStore from 'store/sessionStore';
 function AuthRedirect() {
   const {
     navigate,
-    state: {
+    store: {
       currentLocation: { search }
     }
   } = useRouter();

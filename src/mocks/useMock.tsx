@@ -10,8 +10,6 @@ export default function useMock() {
   useEffect(() => {
     if (mock && env === 'development') {
       worker.start({ onUnhandledRequest: 'bypass', quiet: true });
-    } else {
-      worker.stop();
     }
   }, [env, mock]);
 }

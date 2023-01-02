@@ -60,7 +60,7 @@ const profileRoute = indexRoute.createRoute({
   errorComponent: ErrorPage
 });
 
-const userRoute = indexRoute.createRoute({
+export const userRoute = indexRoute.createRoute({
   path: 'user',
   component: () => (
     <RouteGuard authKey="userDetail">
@@ -71,7 +71,7 @@ const userRoute = indexRoute.createRoute({
   loader: userLoader
 });
 
-const userDetailRoute = userRoute.createRoute({
+export const userDetailRoute = userRoute.createRoute({
   path: 'detail',
   component: UserDetail,
   errorComponent: ErrorPage,
