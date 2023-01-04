@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 import { faker } from '@faker-js/faker';
-import { User } from '../pages/User/userLoader';
+import { User } from 'types/users';
 
 export const handlers = [
   // rest.post('/login', (req, res, ctx) => {

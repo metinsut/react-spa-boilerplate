@@ -1,17 +1,19 @@
 import useInitAuth from 'hooks/useInitAuth';
 import React from 'react';
-import useMock from 'mocks/useMock';
 import Routes from 'routes/Routes';
 import ErrorBoundary from 'components/Errors/ErrorBoundary';
+import Mock from 'mocks/Mock';
 
 function App() {
-  useMock();
   useInitAuth();
 
   return (
-    <ErrorBoundary>
-      <Routes />
-    </ErrorBoundary>
+    <>
+      <Mock />
+      <ErrorBoundary>
+        <Routes />
+      </ErrorBoundary>
+    </>
   );
 }
 

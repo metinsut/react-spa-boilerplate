@@ -8,8 +8,10 @@ export default function useMock() {
   const env = import.meta.env.MODE;
 
   useEffect(() => {
-    if (mock && env === 'development') {
+    if (mock === true && env === 'development') {
       worker.start({ onUnhandledRequest: 'bypass', quiet: true });
     }
   }, [env, mock]);
+
+  return mock;
 }

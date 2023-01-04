@@ -17,7 +17,7 @@ export default function Header() {
   } = useRouter();
 
   return (
-    <header className="grid grid-flow-col p-4 bg-purple-600 justify-between items-center">
+    <header className="grid grid-flow-col p-4 bg-purple-600 justify-between items-center sticky top-0 w-full left-0">
       <nav className="flex gap-4 text-white">
         <Link to="/home" activeProps={() => ({ className: 'font-bold' })}>
           {t('home')}

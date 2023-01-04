@@ -19,7 +19,7 @@ export default function Layout() {
   return (
     <>
       <Header />
-      <div className="overflow-auto p-4 overflow-x-hidden" style={{ height: 'calc(100vh - 66px)' }}>
+      <div className="overflow-auto p-4 overflow-x-hidden">
         <Outlet />
       </div>
     </>
