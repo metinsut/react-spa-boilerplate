@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { RouterProvider, createReactRouter, createRouteConfig } from '@tanstack/react-router';
 import FullScreenLoader from 'components/Loader';
 import Layout from 'components/Layout/Layout';
-import Profile from 'pages/Auth/Profile';
+import Profile from 'pages/Auth/Profile/Profile';
 import ErrorPage from 'components/Errors/Error';
 import AuthGuard from 'components/Layout/AuthGuard';
 import RouteGuard from 'components/Layout/RouteGuard';

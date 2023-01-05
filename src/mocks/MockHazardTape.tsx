@@ -1,8 +1,8 @@
 import React from 'react';
-import useMock from './useMock';
+import { useReadLocalStorage } from 'usehooks-ts';
 
-export default function Mock() {
-  const mock = useMock();
+export default function MockHazardTape() {
+  const mock = useReadLocalStorage('mock');
 
   return mock ? (
     <div

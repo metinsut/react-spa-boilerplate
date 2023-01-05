@@ -1,9 +1,11 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import path from 'path';
+import { visualizer } from 'rollup-plugin-visualizer';
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), visualizer(), viteCommonjs()],
   resolve: {
     alias: {
       types: path.resolve(__dirname, './src/types'),
@@ -21,5 +23,10 @@ export default defineConfig({
   },
   server: {
     port: 3000
+  },
+  define: {
+    global: {
+      require
+    }
   }
 });
