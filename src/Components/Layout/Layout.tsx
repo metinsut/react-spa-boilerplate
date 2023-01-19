@@ -5,7 +5,9 @@ import Header from '../Header/Header';
 export default function Layout() {
   const {
     store: {
-      currentLocation: { pathname }
+      state: {
+        currentLocation: { pathname }
+      }
     },
     navigate
   } = useRouter();

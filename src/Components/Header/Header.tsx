@@ -12,7 +12,9 @@ export default function Header() {
   };
 
   const {
-    store: { isFetching }
+    store: {
+      state: { isFetching }
+    }
   } = useRouter();
 
   return (

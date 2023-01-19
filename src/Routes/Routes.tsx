@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { RouterProvider, createReactRouter, createRouteConfig } from '@tanstack/react-router';
+import { RouterProvider, ReactRouter, createRouteConfig } from '@tanstack/react-router';
 import FullScreenLoader from 'components/Loader';
 import Layout from 'components/Layout/Layout';
 import Profile from 'pages/Auth/Profile/Profile';
@@ -85,7 +85,7 @@ const routeConfig = rootRoute.addChildren([
   indexRoute.addChildren([homeRoute, profileRoute, userRoute.addChildren([userDetailRoute])])
 ]);
 
-const router = createReactRouter({
+const router = new ReactRouter({
   routeConfig,
   defaultErrorComponent: ErrorPage,
   defaultPendingComponent: FullScreenLoader

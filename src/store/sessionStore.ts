@@ -1,5 +1,5 @@
 import { SessionState } from 'types/session';
-import create from 'zustand';
+import { create } from 'zustand';
 
 const useSessionStore = create<SessionState>((set) => ({
   userId: null,

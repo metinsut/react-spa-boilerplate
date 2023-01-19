@@ -8,7 +8,9 @@ function AuthRedirect() {
   const {
     navigate,
     store: {
-      currentLocation: { search }
+      state: {
+        currentLocation: { search }
+      }
     }
   } = useRouter();
 

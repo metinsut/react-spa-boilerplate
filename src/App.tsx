@@ -7,11 +7,9 @@ function App() {
   useInitAuth();
 
   return (
-    <>
-      <ErrorBoundary>
-        <Routes />
-      </ErrorBoundary>
-    </>
+    <ErrorBoundary>
+      <Routes />
+    </ErrorBoundary>
   );
 }
 
