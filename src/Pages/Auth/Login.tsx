@@ -39,7 +39,7 @@ export default function Login() {
       setLoading(false);
       setAuth(user);
       setSession(session);
-      navigate({ to: '/profile' });
+      // navigate({ to: '/profile' });
     } catch (err: any) {
       setLoading(false);
       setError(err.items);

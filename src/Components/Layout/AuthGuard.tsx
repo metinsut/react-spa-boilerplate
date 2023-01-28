@@ -15,7 +15,7 @@ export default function AuthGuard(props: Props) {
 
   useEffect(() => {
     if (!auth) {
-      navigate({ to: '/login' });
+      // navigate({ to: '/login' });
     }
   }, [navigate, auth]);
 

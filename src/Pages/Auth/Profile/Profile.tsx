@@ -21,7 +21,7 @@ export default function Profile() {
 
       setSession(null);
       setAuth(null);
-      navigate({ to: '/login' });
+      // navigate({ to: '/login' });
     } catch (err) {
       console.error(err);
     }

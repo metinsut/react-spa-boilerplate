@@ -11,11 +11,11 @@ export default function Header() {
     i18n.changeLanguage(language);
   };
 
-  const {
-    store: {
-      state: { isFetching }
-    }
-  } = useRouter();
+  // const {
+  //   store: {
+  //     state: { isFetching }
+  //   }
+  // } = useRouter();
 
   return (
     <>
@@ -29,7 +29,7 @@ export default function Header() {
             {t('user')}
           </Link>
         </nav>
-        <div className="text-white">{isFetching ? 'Loading...' : ''}</div>
+        {/* <div className="text-white">{isFetching ? 'Loading...' : ''}</div> */}
         <div className="text-white grid items-center justify-items-center grid-flow-col gap-2">
           <div className="flex gap-2 border border-solid border-purple-400 p-1 rounded-lg">
             <button onClick={() => handleLanguageChange('en')}>EN</button>

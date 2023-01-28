@@ -38,7 +38,7 @@ export default function Register() {
       if (session) {
         setAuth(user);
         setSession(session);
-        navigate({ to: '/profile' });
+        // navigate({ to: '/profile' });
       } else {
         setSuccess(`We sent a verification link to your email`);
         setError(null);

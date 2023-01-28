@@ -23,11 +23,11 @@ function AuthRedirect() {
     if (user) {
       setAuth(user);
       setSession(session);
-      navigate({ to: '/profile' });
+      // navigate({ to: '/profile' });
     } else {
-      navigate({ to: '/login' });
+      // navigate({ to: '/login' });
     }
-  }, [navigate, search.access_token, setAuth, setSession]);
+  }, [search.access_token, setAuth, setSession]);
 
   useEffect(() => {
     handleToken();

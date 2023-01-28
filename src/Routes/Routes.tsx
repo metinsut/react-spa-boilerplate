@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
-import { RouterProvider, ReactRouter, createRouteConfig } from '@tanstack/react-router';
+import { RouterProvider, ReactRouter, RootRoute, Route } from '@tanstack/react-router';
+import { Loader } from '@tanstack/react-loaders';
 import FullScreenLoader from 'components/Loader';
 import Layout from 'components/Layout/Layout';
 import Profile from 'pages/Auth/Profile/Profile';
@@ -16,21 +17,36 @@ import Register from 'pages/Auth/Register';
 import AuthRedirect from 'pages/Auth/AuthRedirect';
 import { z } from 'zod';
 
-const rootRoute = createRouteConfig({});
+const rootRoute = new RootRoute({});
 
-const loginRoute = rootRoute.createRoute({
+export const loginRoute = new Route({
+  getParentRoute: () => rootRoute,
   path: '/login',
   component: Login,
   errorComponent: ErrorPage
 });
 
-const registerRoute = rootRoute.createRoute({
+// const loginRoute = rootRoute.parentRoute({
+//   path: '/login',
+//   component: Login,
+//   errorComponent: ErrorPage
+// });
+
+export const registerRoute = new Route({
+  getParentRoute: () => rootRoute,
   path: '/register',
   component: Register,
   errorComponent: ErrorPage
 });
 
-const authRedirectRoute = rootRoute.createRoute({
+// const registerRoute = rootRoute.parentRoute({
+//   path: '/register',
+//   component: Register,
+//   errorComponent: ErrorPage
+// });
+
+export const authRedirectRoute = new Route({
+  getParentRoute: () => rootRoute,
   path: '/auth-redirect',
   component: AuthRedirect,
   validateSearch: z.object({
@@ -39,7 +55,17 @@ const authRedirectRoute = rootRoute.createRoute({
   errorComponent: ErrorPage
 });
 
-const indexRoute = rootRoute.createRoute({
+// const authRedirectRoute = rootRoute.parentRoute({
+//   path: '/auth-redirect',
+//   component: AuthRedirect,
+//   validateSearch: z.object({
+//     access_token: z.string().optional()
+//   }),
+//   errorComponent: ErrorPage
+// });
+
+export const indexRoute = new Route({
+  getParentRoute: () => rootRoute,
   path: '/',
   component: () => (
     <AuthGuard>
@@ -48,19 +74,48 @@ const indexRoute = rootRoute.createRoute({
   )
 });
 
-const homeRoute = indexRoute.createRoute({
+// const indexRoute = rootRoute.parentRoute({
+//   path: '/',
+//   component: () => (
+//     <AuthGuard>
+//       <Layout />
+//     </AuthGuard>
+//   )
+// });
+
+export const homeRoute = new Route({
+  getParentRoute: () => rootRoute,
   path: 'home',
   component: Home,
   errorComponent: ErrorPage
 });
 
-const profileRoute = indexRoute.createRoute({
+// const homeRoute = indexRoute.createRoute({
+//   path: 'home',
+//   component: Home,
+//   errorComponent: ErrorPage
+// });
+
+export const profileRoute = new Route({
+  getParentRoute: () => rootRoute,
   path: 'profile',
   component: Profile,
   errorComponent: ErrorPage
 });
 
-export const userRoute = indexRoute.createRoute({
+// const profileRoute = indexRoute.createRoute({
+//   path: 'profile',
+//   component: Profile,
+//   errorComponent: ErrorPage
+// });
+
+export const usersLoader = new Loader({
+  key: 'users',
+  loader: userLoader
+});
+
+export const userRoute = new Route({
+  getParentRoute: () => rootRoute,
   path: 'user',
   component: () => (
     <RouteGuard authKey="userDetail">
@@ -68,17 +123,41 @@ export const userRoute = indexRoute.createRoute({
     </RouteGuard>
   ),
   errorComponent: ErrorPage,
-  loader: userLoader
+  onLoad: async ({ preload }) => usersLoader.load({ preload })
 });
 
-export const userDetailRoute = userRoute.createRoute({
-  path: 'detail',
-  component: UserDetail,
-  errorComponent: ErrorPage,
+// export const userRoute = indexRoute.createRoute({
+//   path: 'user',
+//   component: () => (
+//     <RouteGuard authKey="userDetail">
+//       <User />
+//     </RouteGuard>
+//   ),
+//   errorComponent: ErrorPage,
+//   loader: userLoader
+// });
+
+export const userDetailLoaderRoot = new Loader({
+  key: 'users',
   loader: userDetailLoader
 });
 
-const routeConfig = rootRoute.addChildren([
+export const userDetailRoute = new Route({
+  getParentRoute: () => userRoute,
+  path: 'detail',
+  component: UserDetail,
+  errorComponent: ErrorPage,
+  onLoad: async ({ preload }) => userDetailLoaderRoot.load({ preload })
+});
+
+// export const userDetailRoute = userRoute.createRoute({
+//   path: 'detail',
+//   component: UserDetail,
+//   errorComponent: ErrorPage,
+//   loader: userDetailLoader
+// });
+
+const routeTree = rootRoute.addChildren([
   loginRoute,
   registerRoute,
   authRedirectRoute,
@@ -86,7 +165,7 @@ const routeConfig = rootRoute.addChildren([
 ]);
 
 const router = new ReactRouter({
-  routeConfig,
+  routeTree,
   defaultErrorComponent: ErrorPage,
   defaultPendingComponent: FullScreenLoader
 });

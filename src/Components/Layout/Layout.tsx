@@ -14,7 +14,7 @@ export default function Layout() {
 
   useEffect(() => {
     if (pathname === '/') {
-      navigate({ to: '/home' });
+      // navigate({ to: '/home' });
     }
   }, [navigate, pathname]);
 
