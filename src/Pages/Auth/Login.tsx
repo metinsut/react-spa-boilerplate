@@ -6,7 +6,7 @@ import useSessionStore from 'store/sessionStore';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { schema, TRegister } from './schema';
-import TextInput from 'components/Inputs/TextInput';
+import TextInput from 'components/inputs/textInput';
 
 export default function Login() {
   const { navigate } = useRouter();

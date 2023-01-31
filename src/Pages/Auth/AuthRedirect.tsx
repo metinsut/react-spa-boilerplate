@@ -18,7 +18,8 @@ function AuthRedirect() {
   const setSession = useSessionStore((state) => state.setSession);
 
   const handleToken = useCallback(async () => {
-    const { user, session } = await altogic.auth.getAuthGrant(search.access_token);
+    // const { user, session } = await altogic.auth.getAuthGrant(search.access_token);
+    const { user, session } = await altogic.auth.getAuthGrant();
 
     if (user) {
       setAuth(user);
@@ -27,7 +28,7 @@ function AuthRedirect() {
     } else {
       // navigate({ to: '/login' });
     }
-  }, [search.access_token, setAuth, setSession]);
+  }, [setAuth, setSession]);
 
   useEffect(() => {
     handleToken();

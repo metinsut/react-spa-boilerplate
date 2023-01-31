@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Outlet, useRouter } from '@tanstack/react-router';
-import Header from '../Header/Header';
+import Header from 'components/header/header';
 
 export default function Layout() {
   const {

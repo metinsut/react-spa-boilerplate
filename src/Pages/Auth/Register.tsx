@@ -7,7 +7,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { schema } from './schema';
 import { AuthRequest } from 'types/auth';
-import TextInput from 'components/Inputs/TextInput';
+import TextInput from 'components/inputs/textInput';
 
 export default function Register() {
   const { navigate } = useRouter();

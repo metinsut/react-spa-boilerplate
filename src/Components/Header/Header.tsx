@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import i18n from '../../utils/i18n';
 import { Link, useRouter } from '@tanstack/react-router';
-import MockHazardTape from 'mocks/MockHazardTape';
+import MockHazardTape from 'mocks/mockHazardTape';
 
 export default function Header() {
   const { t } = useTranslation();

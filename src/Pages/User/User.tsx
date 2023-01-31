@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, Link } from '@tanstack/react-router';
-import { userRoute, usersLoader } from 'routes/Routes';
+import { userRoute, usersLoader } from 'routes/routes';
 import { Loader, LoaderInstance } from '@tanstack/react-loaders';
 
 export default function User() {

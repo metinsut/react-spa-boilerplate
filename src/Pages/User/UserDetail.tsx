@@ -1,6 +1,6 @@
 import React from 'react';
 // import { useLoaderData } from '@tanstack/react-router';
-import { userDetailRoute } from 'routes/Routes';
+import { userDetailRoute } from 'routes/routes';
 
 export default function UserDetail() {
   // const { userDetail } = useLoaderData({ from: userDetailRoute.id });

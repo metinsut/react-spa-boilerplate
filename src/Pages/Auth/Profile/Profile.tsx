@@ -3,7 +3,7 @@ import altogic from 'helpers/altogic';
 import React from 'react';
 import useSessionStore from 'store/sessionStore';
 import useAuthStore from 'store/authStore';
-import ToggleMock from './ToggleMock';
+import ToggleMock from './toggleMock';
 
 export default function Profile() {
   const { navigate } = useRouter();
