@@ -1,4 +1,4 @@
-import { Link, useRouter } from '@tanstack/react-router';
+import { Link, Route, useRouter } from '@tanstack/react-router';
 import altogic from 'helpers/altogic';
 import React, { useState } from 'react';
 import useAuthStore from 'store/authStore';
@@ -8,6 +8,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { schema } from './schema';
 import { AuthRequest } from 'types/auth';
 import TextInput from 'components/inputs/textInput';
+import { rootRoute } from 'routes/routes';
+import ErrorPage from 'components/errors/error';
+
+export const registerRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: '/register',
+  component: Register,
+  errorComponent: ErrorPage
+});
 
 export default function Register() {
   const { navigate } = useRouter();

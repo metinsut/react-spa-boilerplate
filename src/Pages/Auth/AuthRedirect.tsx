@@ -1,18 +1,24 @@
-import { useRouter } from '@tanstack/react-router';
+import { Route, useNavigate, useStore } from '@tanstack/react-router';
+import ErrorPage from 'components/errors/error';
 import altogic from 'helpers/altogic';
 import React, { useCallback, useEffect } from 'react';
+import { rootRoute } from 'routes/routes';
 import useAuthStore from 'store/authStore';
 import useSessionStore from 'store/sessionStore';
+import { z } from 'zod';
+
+export const authRedirectRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: '/auth-redirect',
+  component: AuthRedirect,
+  validateSearch: z.object({
+    access_token: z.string().optional()
+  }),
+  errorComponent: ErrorPage
+});
 
 function AuthRedirect() {
-  const {
-    navigate,
-    store: {
-      state: {
-        currentLocation: { search }
-      }
-    }
-  } = useRouter();
+  const navigate = useNavigate();
 
   const setAuth = useAuthStore((state) => state.setAuth);
   const setSession = useSessionStore((state) => state.setSession);
@@ -24,11 +30,11 @@ function AuthRedirect() {
     if (user) {
       setAuth(user);
       setSession(session);
-      // navigate({ to: '/profile' });
+      navigate({ to: '/profile' });
     } else {
-      // navigate({ to: '/login' });
+      navigate({ to: '/login' });
     }
-  }, [setAuth, setSession]);
+  }, [navigate, setAuth, setSession]);
 
   useEffect(() => {
     handleToken();

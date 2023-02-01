@@ -1,4 +1,4 @@
-import { Link, useRouter } from '@tanstack/react-router';
+import { Link, Route, useNavigate } from '@tanstack/react-router';
 import altogic from 'helpers/altogic';
 import React, { useState } from 'react';
 import useAuthStore from 'store/authStore';
@@ -7,9 +7,19 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { schema, TRegister } from './schema';
 import TextInput from 'components/inputs/textInput';
+import { rootRoute } from 'routes/routes';
+import ErrorPage from 'components/errors/error';
+import { lazy } from '@tanstack/react-router';
+
+export const loginRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: '/login',
+  component: lazy(() => import('./login')),
+  errorComponent: ErrorPage
+});
 
 export default function Login() {
-  const { navigate } = useRouter();
+  const navigate = useNavigate();
 
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
@@ -39,7 +49,7 @@ export default function Login() {
       setLoading(false);
       setAuth(user);
       setSession(session);
-      // navigate({ to: '/profile' });
+      navigate({ to: '/profile' });
     } catch (err: any) {
       setLoading(false);
       setError(err.items);

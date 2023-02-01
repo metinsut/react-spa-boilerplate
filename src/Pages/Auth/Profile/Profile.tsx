@@ -1,9 +1,18 @@
-import { useRouter } from '@tanstack/react-router';
+import { Route, useRouter } from '@tanstack/react-router';
 import altogic from 'helpers/altogic';
 import React from 'react';
 import useSessionStore from 'store/sessionStore';
 import useAuthStore from 'store/authStore';
 import ToggleMock from './toggleMock';
+import { rootRoute } from 'routes/routes';
+import ErrorPage from 'components/errors/error';
+
+export const profileRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: 'profile',
+  component: Profile,
+  errorComponent: ErrorPage
+});
 
 export default function Profile() {
   const { navigate } = useRouter();
