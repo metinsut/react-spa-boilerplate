@@ -36,7 +36,7 @@ export default ErrorBoundary;
 function ErrorFunctionComponent() {
   return (
     <div>
-      <a href="/">Go Back</a>
+      <a href="/">Go Home Page</a>
       <h1>Sorry.. there was an error</h1>
     </div>
   );

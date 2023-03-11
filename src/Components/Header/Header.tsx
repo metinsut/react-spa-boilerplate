@@ -1,8 +1,8 @@
+import MockHazardTape from 'mocks/MockHazardTape';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link, NavLink } from 'react-router-dom';
 import i18n from '../../utils/i18n';
-import { Link, useRouter } from '@tanstack/react-router';
-import MockHazardTape from 'mocks/mockHazardTape';
 
 export default function Header() {
   const { t } = useTranslation();
@@ -11,23 +11,25 @@ export default function Header() {
     i18n.changeLanguage(language);
   };
 
-  // const {
-  //   store: {
-  //     state: { isFetching }
-  //   }
-  // } = useRouter();
-
   return (
     <>
       <MockHazardTape />
       <header className="grid grid-flow-col p-4 bg-purple-600 justify-between items-center sticky top-0 w-full left-0">
         <nav className="flex gap-4 text-white">
-          <Link to="/home" activeProps={() => ({ className: 'font-bold' })}>
+          <NavLink
+            to="/"
+            className={({ isActive, isPending }) =>
+              isPending ? 'pending' : isActive ? 'font-bold' : ''
+            }>
             {t('home')}
-          </Link>
-          <Link to="/user" activeProps={() => ({ className: 'font-bold' })}>
+          </NavLink>
+          <NavLink
+            to="/user"
+            className={({ isActive, isPending }) =>
+              isPending ? 'pending' : isActive ? 'font-bold' : ''
+            }>
             {t('user')}
-          </Link>
+          </NavLink>
         </nav>
         {/* <div className="text-white">{isFetching ? 'Loading...' : ''}</div> */}
         <div className="text-white grid items-center justify-items-center grid-flow-col gap-2">

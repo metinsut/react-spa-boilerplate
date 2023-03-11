@@ -1,7 +1,7 @@
 import React from 'react';
 import useInitAuth from 'hooks/useInitAuth';
-import Routes from 'routes/routes';
-import ErrorBoundary from 'components/errors/ErrorBoundary';
+import ErrorBoundary from 'components/Errors/ErrorBoundary';
+import Routes from 'routes/Routes';
 
 function App() {
   useInitAuth();

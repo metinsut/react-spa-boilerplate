@@ -1,15 +1,5 @@
-import { Route } from '@tanstack/react-router';
-import ErrorPage from 'components/errors/error';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { rootRoute } from 'routes/routes';
-
-export const homeRoute = new Route({
-  getParentRoute: () => rootRoute,
-  path: 'home',
-  component: Home,
-  errorComponent: ErrorPage
-});
 
 export default function Home() {
   const { t } = useTranslation();

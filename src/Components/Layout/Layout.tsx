@@ -1,23 +1,8 @@
-import React, { useEffect } from 'react';
-import { Outlet, useRouter } from '@tanstack/react-router';
-import Header from 'components/header/header';
+import Header from 'components/Header/Header';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 export default function Layout() {
-  const {
-    store: {
-      state: {
-        currentLocation: { pathname }
-      }
-    },
-    navigate
-  } = useRouter();
-
-  useEffect(() => {
-    if (pathname === '/') {
-      // navigate({ to: '/home' });
-    }
-  }, [navigate, pathname]);
-
   return (
     <>
       <Header />

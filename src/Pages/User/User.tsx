@@ -1,29 +1,8 @@
 import React from 'react';
-import { Outlet, Link, Route } from '@tanstack/react-router';
-import { Loader, LoaderInstance } from '@tanstack/react-loaders';
-import { userLoader } from './userLoader';
-import { rootRoute } from 'routes/routes';
-import RouteGuard from 'components/layout/routeGuard';
-import ErrorPage from 'components/errors/error';
-
-export const usersLoader = new Loader({
-  key: 'users',
-  loader: userLoader
-});
-
-export const userRoute = new Route({
-  getParentRoute: () => rootRoute,
-  path: 'user',
-  component: () => (
-    <RouteGuard authKey="userDetail">
-      <User />
-    </RouteGuard>
-  ),
-  errorComponent: ErrorPage,
-  onLoad: async ({ preload }) => usersLoader.load({ preload })
-});
+import { Link, Outlet } from 'react-router-dom';
 
 export default function User() {
+  const userId = 1;
   // const { users } = LoaderState({ from: userRoute.id });
   // const usersLoaderInstance = new LoaderInstance({ loader: usersLoader });
   // const users = usersLoaderInstance.state.data;
@@ -45,7 +24,7 @@ export default function User() {
       </div>
       <div>Detail</div>
       <div>
-        <Link to="/user/detail">Go Detail</Link>
+        <Link to={`/user/${userId}`}>Go Detail</Link>
       </div>
       <Outlet />
     </div>
